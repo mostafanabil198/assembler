@@ -37,6 +37,13 @@ class Singleton {
     int operationFormat(string operation);
     string getOpCode(string operation);
     int getRegesterCode(string regester);
+    void setHeaderRecord(string record);
+    void setEndRecord(string record);
+    string getHeaderRecord();
+    string getEndRecord();
+    vector<pair<string,string>> getTextRecords();
+    void addTRecord(string ad, string objectCodes);
+
 
 
 
@@ -52,9 +59,11 @@ Singleton();
     unordered_map<string,int> regesters;
     deque<Instructions> literals;
     vector<Instructions> allInstructions;
+    string headerRecord;
+    string endRecord;
     bool error;
     bool endb;
-
+    vector<pair<string,string>> textRecords;
 
 
 

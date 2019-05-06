@@ -382,6 +382,20 @@ bool Singleton::isLiteralEmpty()
     return literals.empty();
 }
 
+
+    void Singleton::setHeaderRecord(string record){
+        this->headerRecord = record;
+    }
+    void Singleton::setEndRecord(string record){
+        this->endRecord = record;
+    }
+    string Singleton::getHeaderRecord(){
+        return headerRecord;
+    }
+    string Singleton::getEndRecord(){
+        return endRecord;
+    }
+
 Instructions Singleton::getLiteral()
 {
     Instructions i = literals.front();
@@ -411,6 +425,13 @@ vector<Instructions> Singleton::getAllInstructions(){
 
 int Singleton::getRegesterCode(string regester){
     return regesters[regester];
+}
+
+vector<pair<string,string>> Singleton::getTextRecords(){
+    return textRecords;
+}
+void Singleton::addTRecord(string ad, string objectCodes){
+    textRecords.push_back(make_pair(ad,objectCodes));
 }
 
 

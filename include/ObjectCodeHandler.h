@@ -24,6 +24,7 @@ class ObjectCodeHandler
     const char* bin_char_to_hex(string c);
     string bin_str_to_hex_str(const std::string& bin);
     string toBinary(int n);
+    string to_hexa(int ad);
 
 };
 

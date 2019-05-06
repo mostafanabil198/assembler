@@ -33,7 +33,7 @@
 	<Singleton.h>
 	<string>
 
-1557149084 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
+1557175317 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
 	<iostream>
 	<Instructions.h>
 
@@ -73,7 +73,7 @@
 	<Files.h>
 	<Singleton.h>
 
-1557171106 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+1557175627 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>
@@ -82,7 +82,7 @@
 	<Singleton.h>
 	<string>
 
-1557170229 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
+1557175564 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
 	"ObjectCodeHandler.h"
 	<bits/stdc++.h>
 	<iostream>

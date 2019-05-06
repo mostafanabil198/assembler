@@ -17,12 +17,44 @@ ObjectCodeHandler::ObjectCodeHandler()
 
 void ObjectCodeHandler::generateObjectCode()
 {
+    string tRecord = "";
+    string startA = "";
     vector<Instructions> instructions = tables->getAllInstructions();
     for(int i=0; i<instructions.size(); i++)
     {
         if(instructions[i].getError() != "" || instructions[i].getOperation() == "end" || instructions[i].getOperation() == "resb" ||instructions[i].getOperation() == "resw")
         {
+            if(instructions[i].getOperation() == "end"){
+                    string record = "E";
+                    if(tables->symbol_table_contains(instructions[i].getLabel())){
+                            record+= "000001";
+                    } else {
+                        int ad = tables->symbol_table_get(instructions[i].getLabel());
+                        std::string out_string;
+                        std::stringstream ss;
+                        ss << ad;
+                        out_string = ss.str();
+                        while(out_string.length() < 6){
+                            out_string = "0" + out_string;
+                        }
+                        record += out_string;
+                    }
+                tables->setEndRecord(record);
+            }
+
+            if((instructions[i].getOperation() == "resw" || instructions[i].getOperation() == "resb") && tRecord.length() > 0) {
+                tables->addTRecord(startA,tRecord);
+                tRecord = "";
+            }
             continue;
+        }
+        if(instructions[i].getOperation() == "start"){
+            string record = "H" + instructions[i].getLabel();
+            while(record.length() < 7){
+                record += " ";
+            }
+            record += "^" + instructions[i].getOperand();
+            tables->setHeaderRecord(record);
         }
         int format = tables->operationFormat(instructions[i].getOperation());
         switch(format)
@@ -30,6 +62,15 @@ void ObjectCodeHandler::generateObjectCode()
         case 1:
         {
             instructions[i].setObjectCode(tables->getOpCode(instructions[i].getOperation()));
+            if(tRecord.length() + tables->getOpCode(instructions[i].getOperation()).length() <= 60){
+                    if(tRecord.length() == 0){
+                        startA = to_hexa(instructions[i].getAdress());
+                    }
+                tRecord += tables->getOpCode(instructions[i].getOperation());
+            } else {
+                tables->addTRecord(startA,tRecord);
+                tRecord = "";
+            }
         }
         break;
         case 2:
@@ -58,6 +99,15 @@ void ObjectCodeHandler::generateObjectCode()
             }
 
             instructions[i].setObjectCode(objectCode);
+            if(tRecord.length() + objectCode.length() <= 60){
+                if(tRecord.length() == 0){
+                    startA = to_hexa(instructions[i].getAdress());
+                }
+                tRecord += objectCode;
+            } else {
+                tables->addTRecord(startA,tRecord);
+                tRecord = "";
+            }
         }
         break;
         case 3:
@@ -168,6 +218,16 @@ void ObjectCodeHandler::generateObjectCode()
             string objectCode = bin_str_to_hex_str(opCodeB);
             instructions[i].setObjectCode(objectCode);
 
+            if(tRecord.length() + objectCode.length() <= 60){
+                if(tRecord.length() == 0){
+                    startA = to_hexa(instructions[i].getAdress());
+                }
+                tRecord += objectCode;
+            } else {
+                tables->addTRecord(startA,tRecord);
+                tRecord = "";
+            }
+
         }
         break;
         case 4:
@@ -223,19 +283,30 @@ void ObjectCodeHandler::generateObjectCode()
             opCodeB+=toBinary(TA);
             string objectCode = bin_str_to_hex_str(opCodeB);
             instructions[i].setObjectCode(objectCode);
+
+            if(tRecord.length() + objectCode.length() <= 60){
+                if(tRecord.length() == 0){
+                    startA = to_hexa(instructions[i].getAdress());
+                }
+                tRecord += objectCode;
+            } else {
+                tables->addTRecord(startA,tRecord);
+                tRecord = "";
+            }
         }
         break;
         default:
             break;
         }
-
-
-
     }
-
+    tables->setAllInstructions(instructions);
 }
 
-
+string ObjectCodeHandler::to_hexa(int ad){
+    std::stringstream sstream;
+    sstream << std::hex << ad;
+    return sstream.str();
+}
 
 const char* ObjectCodeHandler::hex_char_to_bin(char c)
 {
