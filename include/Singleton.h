@@ -25,6 +25,7 @@ class Singleton {
     void addInstruction(Instructions i);
     Instructions getInstruction(int i);
     vector<Instructions> getAllInstructions();
+    void setAllInstructions(vector<Instructions> instructions);
     bool dirTable_contains(string dir);
     int literalOperationsSize(string operation);
     void covertLiteralsToHexa(string literal);
@@ -34,6 +35,8 @@ class Singleton {
     void set_error(bool errorb);
     unordered_map<string,pair<int,string>> get_symbol_table();
     int operationFormat(string operation);
+    string getOpCode(string operation);
+    int getRegesterCode(string regester);
 
 
 
@@ -46,6 +49,7 @@ Singleton();
     unordered_map<string,pair<int,string>> operations;
     unordered_map<string,pair<int,string>> symbol_table;
     unordered_map<char,string> asciiTable;
+    unordered_map<string,int> regesters;
     deque<Instructions> literals;
     vector<Instructions> allInstructions;
     bool error;
