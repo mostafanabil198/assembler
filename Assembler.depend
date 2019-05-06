@@ -1,0 +1,75 @@
+# depslib dependency file v1.0
+1556139383 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\main.cpp
+	<iostream>
+	<regex>
+	<Parser.h>
+	<bits/stdc++.h>
+	<Files.h>
+	<Singleton.h>
+
+1556974377 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\parser.cpp
+	"Parser.h"
+	<iostream>
+	<bits/stdc++.h>
+	<regex>
+
+1556139116 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
+	<iostream>
+	<Singleton.h>
+	<bits/stdc++.h>
+	<regex>
+	<Instructions.h>
+
+1557144339 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\instructions.h
+	<bits/stdc++.h>
+	<string>
+
+1557144327 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
+	"Instructions.h"
+
+1556145352 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
+	<iostream>
+	<bits/stdc++.h>
+	<Singleton.h>
+	<string>
+
+1556136821 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
+	<iostream>
+	<Instructions.h>
+
+1557145283 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\validate.cpp
+	<Validate.h>
+	<Singleton.h>
+	<bits/stdc++.h>
+	<string>
+
+1556132813 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\validate.h
+	<Instructions.h>
+	<Singleton.h>
+
+1556144111 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
+	"Files.h"
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<Instructions.h>
+
+1556057832 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\files.h
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<Instructions.h>
+	<Parser.h>
+	<Singleton.h>
+	<Validate.h>
+
+1556147290 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
+	<iostream>
+	<regex>
+	<Parser.h>
+	<bits/stdc++.h>
+	<Files.h>
+	<Singleton.h>
+
