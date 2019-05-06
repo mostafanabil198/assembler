@@ -48,6 +48,8 @@ void ObjectCodeHandler::generateObjectCode()
             }
             continue;
         }
+//---------------------------------
+// lsa fl start fadl a5r goz2 azwdo fl record ali hwa l size bta3 l object code kolo
         if(instructions[i].getOperation() == "start"){
             string record = "H" + instructions[i].getLabel();
             while(record.length() < 7){
@@ -75,12 +77,7 @@ void ObjectCodeHandler::generateObjectCode()
         break;
         case 2:
         {
-
-            //vector<string> result;
-            //boost::split(result, instructions[i].getOperand(), boost::is_any_of(","));
             string objectCode = tables->getOpCode(instructions[i].getOperation());
-
-
             string double_operands = "([A-Za-z][A-Za-z]?),([A-Za-z][A-Za-z]?)";
             string single_operand = "([A-Za-z][A-Za-z]?)";
             smatch match;
@@ -177,7 +174,7 @@ void ObjectCodeHandler::generateObjectCode()
                     }
                     else
                     {
-                        // msh 3arf mfrod a handle dol azai lw fe m3 base @ aw # aw kda
+    // msh 3arf mfrod a handle dol azai lw fe m3 base @ aw # aw kda
                         if (instructions[i].getBaseL().find("#") != std::string::npos)
                         {
                             operand = instructions[i].getBaseL().substr(1, instructions[i].getBaseL().length()-1);
@@ -300,6 +297,9 @@ void ObjectCodeHandler::generateObjectCode()
         }
     }
     tables->setAllInstructions(instructions);
+    if(tRecord.length() > 0){
+        tables->addTRecord(startA,tRecord);
+    }
 }
 
 string ObjectCodeHandler::to_hexa(int ad){
