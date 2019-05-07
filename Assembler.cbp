@@ -37,6 +37,7 @@
 		<Unit filename="include/ExpressionEvaluator.h" />
 		<Unit filename="include/Files.h" />
 		<Unit filename="include/Instructions.h" />
+		<Unit filename="include/ObjectCodeHandler.h" />
 		<Unit filename="include/Parser.h" />
 		<Unit filename="include/Singleton.h" />
 		<Unit filename="include/Validate.h" />
@@ -44,6 +45,7 @@
 		<Unit filename="src/ExpressionEvaluator.cpp" />
 		<Unit filename="src/Files.cpp" />
 		<Unit filename="src/Instructions.cpp" />
+		<Unit filename="src/ObjectCodeHandler.cpp" />
 		<Unit filename="src/Parser.cpp" />
 		<Unit filename="src/Singleton.cpp" />
 		<Unit filename="src/Validate.cpp" />

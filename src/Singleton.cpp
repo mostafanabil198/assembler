@@ -247,9 +247,20 @@ void Singleton::initTables()
     asciiTable['y'] = "79";
     asciiTable['z'] = "7A";
 
+    regesters["a"] = 0 ;
+    regesters["x"] = 1 ;
+    regesters["l"] = 2 ;
+    regesters["b"] = 3 ;
+    regesters["s"] = 4 ;
+    regesters["t"] = 5 ;
+    regesters["f"] = 6 ;
+    regesters["pc"] = 8 ;
+    regesters["sw"] = 9 ;
 
 
 }
+
+
 
 unordered_map<string,pair<int,string>> Singleton::getOperations()
 {
@@ -320,6 +331,10 @@ int Singleton::operationFormat(string operation){
     }
 }
 
+string Singleton::getOpCode(string operation){
+        return operations[operation].second;
+}
+
 
 void Singleton::symbol_table_add(string label, int value, string type)
 {
@@ -367,6 +382,20 @@ bool Singleton::isLiteralEmpty()
     return literals.empty();
 }
 
+
+    void Singleton::setHeaderRecord(string record){
+        this->headerRecord = record;
+    }
+    void Singleton::setEndRecord(string record){
+        this->endRecord = record;
+    }
+    string Singleton::getHeaderRecord(){
+        return headerRecord;
+    }
+    string Singleton::getEndRecord(){
+        return endRecord;
+    }
+
 Instructions Singleton::getLiteral()
 {
     Instructions i = literals.front();
@@ -379,6 +408,11 @@ void Singleton::addInstruction(Instructions i)
     allInstructions.push_back(i);
 }
 
+void Singleton::setAllInstructions(vector<Instructions> instructions){
+    this->allInstructions = instructions;
+
+}
+
 Instructions Singleton::getInstruction(int i)
 {
     return allInstructions[i];
@@ -388,6 +422,17 @@ vector<Instructions> Singleton::getAllInstructions(){
     return allInstructions;
 }
 
+
+int Singleton::getRegesterCode(string regester){
+    return regesters[regester];
+}
+
+vector<pair<string,string>> Singleton::getTextRecords(){
+    return textRecords;
+}
+void Singleton::addTRecord(string ad, string objectCodes){
+    textRecords.push_back(make_pair(ad,objectCodes));
+}
 
 
 /**

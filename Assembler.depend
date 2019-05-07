@@ -13,18 +13,18 @@
 	<bits/stdc++.h>
 	<regex>
 
-1556139116 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
+1557167829 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
 	<iostream>
 	<Singleton.h>
 	<bits/stdc++.h>
 	<regex>
 	<Instructions.h>
 
-1557144339 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\instructions.h
+1557167020 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\instructions.h
 	<bits/stdc++.h>
 	<string>
 
-1557144327 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
+1557167054 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
 1556145352 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
@@ -33,11 +33,11 @@
 	<Singleton.h>
 	<string>
 
-1556136821 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
+1557175317 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
 	<iostream>
 	<Instructions.h>
 
-1557145283 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\validate.cpp
+1557146133 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\validate.cpp
 	<Validate.h>
 	<Singleton.h>
 	<bits/stdc++.h>
@@ -73,6 +73,7 @@
 	<Files.h>
 	<Singleton.h>
 
+<<<<<<< HEAD
 1557149273 source:d:\secondyear\secondterm\sysprog\project\code\assembler\src\validate.cpp
 	<Validate.h>
 	<Singleton.h>
@@ -126,4 +127,21 @@
 
 1557149273 source:d:\secondyear\secondterm\sysprog\project\code\assembler\src\instructions.cpp
 	"Instructions.h"
+=======
+1557175627 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+	"ObjectCodeHandler.h"
+	<iostream>
+	<bits/stdc++.h>
+	<regex>
+	<Instructions.h>
+	<Singleton.h>
+	<string>
+
+1557175564 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
+	"ObjectCodeHandler.h"
+	<bits/stdc++.h>
+	<iostream>
+	<Singleton.h>
+	<string>
+>>>>>>> 92885177c872053a15f6a46a072379e26139b1e6
 

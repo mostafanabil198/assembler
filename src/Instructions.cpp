@@ -6,7 +6,7 @@ Instructions::Instructions()
     operation= "";
     operand= "";
     error= "";
-    op= "";
+    objectCode = "";
     adress = 0;
 }
 
@@ -16,6 +16,9 @@ int Instructions::getAdress(){
 
 string Instructions::getError(){
     return error;
+}
+string Instructions::getError2(){
+    return error2;
 }
 
 string Instructions::getLabel(){
@@ -30,7 +33,7 @@ string Instructions::getOperation(){
     return operation;
 }
 
-string Instructions::getOP(){
+string Instructions::getObjectCode(){
     return error;
 }
 
@@ -40,6 +43,14 @@ bool Instructions::getBase(){
 
 void Instructions::setBase(bool base){
     this->base = base;
+}
+
+string Instructions::getBaseL(){
+    return baseL;
+}
+
+void Instructions::setBaseL(string baseL){
+    this->baseL = baseL;
 }
 
 
@@ -54,13 +65,16 @@ void Instructions::setOperation(string operation){
 void Instructions::setError(string error){
     this->error = error;
 }
+void Instructions::setError2(string error){
+    this->error2 = error;
+}
 
 void Instructions::setOperand(string operand){
     this->operand = operand;
 }
 
-void Instructions::setOp(string op){
-    this->op = op;
+void Instructions::setObjectCode(string op){
+    this->objectCode = objectCode;
 }
 
 void Instructions::setLabel(string label){

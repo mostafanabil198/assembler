@@ -11,20 +11,24 @@ class Instructions
 {
     public:
         int getAdress();
-        string getOP();
+        string getObjectCode();
         string getLabel();
         string getOperation();
         string getOperand();
         string getError();
+        string getError2();
         void setLabel(string label);
         void setError(string error);
+        void setError2(string error2);
         void setAdress(int adress);
         void setOperation(string operation);
         void setOperand(string operand);
-        void setOp(string op);
+        void setObjectCode(string op);
         Instructions();
         bool getBase();
         void setBase(bool base);
+        string getBaseL();
+        void  setBaseL(string baseL);
 
 
 
@@ -36,8 +40,10 @@ class Instructions
         string operation;
         string operand;
         string error;
-        string op;
+        string objectCode;
         bool base;
+        string error2;
+        string baseL;
 };
 
 
