@@ -20,11 +20,11 @@
 	<regex>
 	<Instructions.h>
 
-1557167020 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\instructions.h
+1557238708 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\instructions.h
 	<bits/stdc++.h>
 	<string>
 
-1557228368 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
+1557238760 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
 1557224950 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
@@ -47,13 +47,14 @@
 	<Instructions.h>
 	<Singleton.h>
 
-1557227486 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
+1557229061 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
 	"Files.h"
 	<iostream>
 	<fstream>
 	<string>
 	<vector>
 	<Instructions.h>
+	<ObjectCodeHandler.h>
 
 1556057832 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\files.h
 	<iostream>
@@ -65,13 +66,14 @@
 	<Singleton.h>
 	<Validate.h>
 
-1557184275 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
+1557228784 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
 	<iostream>
 	<regex>
 	<Parser.h>
 	<bits/stdc++.h>
 	<Files.h>
 	<Singleton.h>
+	<ObjectCodeHandler.h>
 
 1556147290 D
 
@@ -131,7 +133,7 @@
 
 1557149273 ons.h"
 
-1557227203 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+1557239093 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>
@@ -140,7 +142,7 @@
 	<Singleton.h>
 	<string>
 
-1557175564 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
+1557237517 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
 	"ObjectCodeHandler.h"
 	<bits/stdc++.h>
 	<iostream>
@@ -149,7 +151,8 @@
 
 1557175564 85177c872053a15f6a46a072379e26139b1e6
 
-1557227507 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\expressionevaluator.cpp
+1557228446 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\expressionevaluator.cpp
+	"ExpressionEvaluator.h"
 	<iostream>
 	<Instructions.h>
 	<bits/stdc++.h>

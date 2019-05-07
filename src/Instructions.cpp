@@ -34,7 +34,7 @@ string Instructions::getOperation(){
 }
 
 string Instructions::getObjectCode(){
-    return error;
+    return objectCode;
 }
 
 bool Instructions::getBase(){
@@ -73,10 +73,18 @@ void Instructions::setOperand(string operand){
     this->operand = operand;
 }
 
-void Instructions::setObjectCode(string op){
-    this->objectCode = objectCode;
+void Instructions::setObjectCode(string opeeee){
+    this->objectCode = opeeee;
 }
 
 void Instructions::setLabel(string label){
     this->label = label;
 }
+
+void Instructions::setNixbpe(string nixbpe){
+    this->nixbpe = nixbpe;
+}
+string Instructions::getNixbpe(){
+        return nixbpe;
+}
+

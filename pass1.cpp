@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 #include <Files.h>
 #include <Singleton.h>
+#include <ObjectCodeHandler.h>
 using namespace std;
 
 int main()

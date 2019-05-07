@@ -29,6 +29,8 @@ class Instructions
         void setBase(bool base);
         string getBaseL();
         void  setBaseL(string baseL);
+        void setNixbpe(string nixbpe);
+        string getNixbpe();
 
 
 
@@ -40,6 +42,7 @@ class Instructions
         string operation;
         string operand;
         string error;
+        string nixbpe;
         string objectCode;
         bool base;
         string error2;

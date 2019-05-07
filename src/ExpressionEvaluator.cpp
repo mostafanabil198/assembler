@@ -166,12 +166,90 @@ pair<bool,pair<int,string>>ExpressionEvaluator::validateOperandsTypeEvaluation(p
     }
     else if(operation ==  "+")
     {
+        if(operandOne.second=="relocatable")
+        {
+            if(operandTwo.second=="absolute" || operandTwo.second=="constant")
+            {
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first+operandTwo.first,"relocatable"));
+                return answer;
+            }
+            else
+            {
+                pair<bool,pair<int,string>> answer=make_pair(false,make_pair(0,""));
+                return answer;
+            }
+        }
+        else if(operandOne.second=="absolute" )
+        {
+            if(operandTwo.second=="relocatable")
+            {
 
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first+operandTwo.first,"relocatable"));
+                return answer;
+            }
+            else
+            {
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first+operandTwo.first,"absolute"));
+                return answer;
+            }
+        }else{
+            //case irst operand is constant
+            if(operandTwo.second=="relocatable")
+            {
+
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first+operandTwo.first,"relocatable"));
+                return answer;
+            }
+            else
+            {
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first+operandTwo.first,"absolute"));
+                return answer;
+            }
+
+        }
     }
-
     else if(operation ==  "-")
     {
+if(operandOne.second=="relocatable")
+        {
+            if(operandTwo.second=="absolute" || operandTwo.second=="constant")
+            {
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first-operandTwo.first,"relocatable"));
+                return answer;
+            }
+            else
+            {
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first-operandTwo.first,"absolute"));
+                return answer;
+            }
+        }
+        else if(operandOne.second=="absolute" )
+        {
+            if(operandTwo.second=="relocatable")
+            {
+                 pair<bool,pair<int,string>> answer=make_pair(false,make_pair(0,""));
+                return answer;
+            }
+            else
+            {
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first-operandTwo.first,"absolute"));
+                return answer;
+            }
+        }else{
+            //case irst operand is constant
+            if(operandTwo.second=="relocatable")
+            {
 
+                 pair<bool,pair<int,string>> answer=make_pair(false,make_pair(0,""));
+                return answer;
+            }
+            else
+            {
+                pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first-operandTwo.first,"absolute"));
+                return answer;
+            }
+
+        }
 
 
     }

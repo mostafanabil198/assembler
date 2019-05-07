@@ -88,8 +88,13 @@ void ObjectCodeHandler::generateObjectCode()
             string operands = instructions[i].getOperand();
             if(regex_match(operands,match,double_operands_regex))
             {
-                objectCode += tables->getRegesterCode(match.str(1));
-                objectCode += tables->getRegesterCode(match.str(2));
+
+                std::stringstream ss;
+                ss << tables->getRegesterCode(match.str(1));
+                objectCode += ss.str();
+                std::stringstream ss1;
+                ss1 << tables->getRegesterCode(match.str(2));
+                objectCode += ss1.str();
             }
             else
             {
@@ -112,7 +117,7 @@ void ObjectCodeHandler::generateObjectCode()
         break;
         case 3:
         {
-
+            bool numb = false;
             string opCodeH = tables->getOpCode(instructions[i].getOperation());
             string opCodeB = hex_str_to_bin_str(opCodeH);
             opCodeB = opCodeB.substr(0, 6);
@@ -149,23 +154,27 @@ void ObjectCodeHandler::generateObjectCode()
             int TA;
             if(isdigit(operand[0]))
             {
+                numb = true;
                 TA = std::stoi( operand );
             }
             else
             {
+                numb = false;
                 TA = tables->symbol_table_get(operand);
             }
 
 
 
             int PC = instructions[i+1].getAdress();
+            if(!(i1 == "1" && n == "0" && numb)){
             if((TA - PC) > 2047 || (TA - PC) < -2048)
             {
                 if(!instructions[i].getBase())
                 {
                     p="1";
-                    continue;
+                    cout << instructions[i].getAdress() << " " << instructions[i].getLabel() << "  " << instructions[i].getOperation() << "  " << instructions[i].getOperand() << endl;
                     instructions[i].setError2("Displacement out of range");
+                    continue;
                 }
                 else
                 {
@@ -195,8 +204,8 @@ void ObjectCodeHandler::generateObjectCode()
 
                     if((TA-B1) < 0 || (TA-B1) > 4059) //base variable
                     {
-                        continue;
                         instructions[i].setError2("Displacement out of range");
+                        continue;
                     }
                     else
                     {
@@ -210,13 +219,20 @@ void ObjectCodeHandler::generateObjectCode()
                 TA=TA-PC;
                 p="1";
             }
+            }
             opCodeB+=x;
             opCodeB+=b;
             opCodeB+=p;
             opCodeB+=e;
-            opCodeB+=toBinary(TA);
+            opCodeB+=toBinary(twos(TA,12));
             string objectCode = bin_str_to_hex_str(opCodeB);
+
+            std::stringstream sss;
+            sss << "n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
+            instructions[i].setNixbpe(sss.str());
+            //objectCode= "n:" + n + "i:" + i + "x:" + x + "b:" + b + "e:" + e + "  " + objectCode;
             instructions[i].setObjectCode(objectCode);
+            //instructions[i].setObjectCode(objectCode);
 
             if(tRecord.length() + objectCode.length() <= 60){
                 if(tRecord.length() == 0){
@@ -283,6 +299,9 @@ void ObjectCodeHandler::generateObjectCode()
             opCodeB+=e;
             opCodeB+=toBinary(TA);
             string objectCode = bin_str_to_hex_str(opCodeB);
+            std::stringstream sss;
+            sss << "n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
+            instructions[i].setNixbpe(sss.str());
             instructions[i].setObjectCode(objectCode);
 
             if(tRecord.length() + objectCode.length() <= 60){
@@ -396,7 +415,28 @@ string ObjectCodeHandler::bin_str_to_hex_str(const std::string& bin)
     return hex;
 }
 
-
+int ObjectCodeHandler::twos(int num, int bits){
+    if(num >= 0)
+        return num;
+    num = abs(num);
+    int t = 0;
+    int start = 1;
+    int result = 0;
+    while(num){
+        int d = num % 2;
+        num /= 2;
+        if(!d)
+            result += start;
+        start *= 2;
+        t++;
+    }
+    while(t < bits){
+        t++;
+        result += start;
+        start *= 2;
+    }
+    return result+1;
+}
 string ObjectCodeHandler::toBinary(int n)
 {
     string r;
