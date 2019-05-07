@@ -363,12 +363,6 @@ string ObjectCodeHandler::hex_str_to_bin_str(const std::string& hex)
 
 
 
-
-
-
-
-
-
 const char* ObjectCodeHandler::bin_char_to_hex(string c)
 {
     // TODO handle default / error

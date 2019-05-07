@@ -127,7 +127,7 @@ bool ExpressionEvaluator::checkExist(string operand)
 {
     return !(tables->symbol_table_contains(operand));
 }
-int get_priority(string operation)
+int ExpressionEvaluator::get_priority(string operation)
 {
     if(operation=="*"||operation=="/") return 2;
     return 1;

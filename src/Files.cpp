@@ -67,6 +67,8 @@ vector<string> Files::print(vector<Instructions> given)
         }
         line.append(spaces);
         line.append(operand);
+        line.append(spaces);
+        line.append(given[i].getObjectCode());
         answer.push_back(line);
         string err=given[i].getError();
         if(err!="")

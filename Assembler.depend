@@ -24,7 +24,7 @@
 	<bits/stdc++.h>
 	<string>
 
-1557167054 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
+1557228368 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
 1557224950 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
@@ -47,7 +47,7 @@
 	<Instructions.h>
 	<Singleton.h>
 
-1556144111 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
+1557227486 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
 	"Files.h"
 	<iostream>
 	<fstream>
@@ -131,7 +131,7 @@
 
 1557149273 ons.h"
 
-1557223912 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+1557227203 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>
@@ -148,4 +148,14 @@
 	<string>
 
 1557175564 85177c872053a15f6a46a072379e26139b1e6
+
+1557227507 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\expressionevaluator.cpp
+	<iostream>
+	<Instructions.h>
+	<bits/stdc++.h>
+	<regex>
+
+1557225889 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\expressionevaluator.h
+	<instructions.h>
+	<singleton.h>
 
