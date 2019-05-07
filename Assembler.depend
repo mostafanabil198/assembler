@@ -27,7 +27,7 @@
 1557167054 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
-1556145352 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
+1557175681 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
 	<iostream>
 	<bits/stdc++.h>
 	<Singleton.h>
