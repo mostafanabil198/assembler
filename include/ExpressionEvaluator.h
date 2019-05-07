@@ -7,7 +7,7 @@ class ExpressionEvaluator
 {
     public:
         ExpressionEvaluator();
-        pair<bool,string> checkOperand(Instructions& i);
+        pair<bool,string> checkOperand(Instructions& inst);
     protected:
     private:
         Singleton* tables;

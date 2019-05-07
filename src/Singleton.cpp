@@ -403,6 +403,11 @@ Instructions Singleton::getLiteral()
     return i;
 }
 
+string Singleton::symbol_table_get_type(string symbol){
+    return symbol_table[symbol].second;
+}
+
+
 void Singleton::addInstruction(Instructions i)
 {
     allInstructions.push_back(i);

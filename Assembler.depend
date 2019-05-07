@@ -27,13 +27,13 @@
 1557167054 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
-1557175681 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
+1557224950 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
 	<iostream>
 	<bits/stdc++.h>
 	<Singleton.h>
 	<string>
 
-1557175317 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
+1557224847 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
 	<iostream>
 	<Instructions.h>
 
@@ -65,7 +65,7 @@
 	<Singleton.h>
 	<Validate.h>
 
-1556147290 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
+1557184275 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
 	<iostream>
 	<regex>
 	<Parser.h>
@@ -73,7 +73,8 @@
 	<Files.h>
 	<Singleton.h>
 
-<<<<<<< HEAD
+1556147290 D
+
 1557149273 source:d:\secondyear\secondterm\sysprog\project\code\assembler\src\validate.cpp
 	<Validate.h>
 	<Singleton.h>
@@ -127,8 +128,10 @@
 
 1557149273 source:d:\secondyear\secondterm\sysprog\project\code\assembler\src\instructions.cpp
 	"Instructions.h"
-=======
-1557175627 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+
+1557149273 ons.h"
+
+1557223912 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>
@@ -143,5 +146,6 @@
 	<iostream>
 	<Singleton.h>
 	<string>
->>>>>>> 92885177c872053a15f6a46a072379e26139b1e6
+
+1557175564 85177c872053a15f6a46a072379e26139b1e6
 

@@ -45,6 +45,7 @@ void ObjectCodeHandler::generateObjectCode()
             if((instructions[i].getOperation() == "resw" || instructions[i].getOperation() == "resb") && tRecord.length() > 0) {
                 tables->addTRecord(startA,tRecord);
                 tRecord = "";
+                startA = "";
             }
             continue;
         }
@@ -72,6 +73,7 @@ void ObjectCodeHandler::generateObjectCode()
             } else {
                 tables->addTRecord(startA,tRecord);
                 tRecord = "";
+                startA = "";
             }
         }
         break;
@@ -104,6 +106,7 @@ void ObjectCodeHandler::generateObjectCode()
             } else {
                 tables->addTRecord(startA,tRecord);
                 tRecord = "";
+                startA = "";
             }
         }
         break;
@@ -223,6 +226,7 @@ void ObjectCodeHandler::generateObjectCode()
             } else {
                 tables->addTRecord(startA,tRecord);
                 tRecord = "";
+                startA = "";
             }
 
         }
@@ -289,6 +293,7 @@ void ObjectCodeHandler::generateObjectCode()
             } else {
                 tables->addTRecord(startA,tRecord);
                 tRecord = "";
+                startA = "";
             }
         }
         break;
@@ -310,7 +315,6 @@ string ObjectCodeHandler::to_hexa(int ad){
 
 const char* ObjectCodeHandler::hex_char_to_bin(char c)
 {
-    // TODO handle default / error
     switch(toupper(c))
     {
     case '0':
