@@ -23,6 +23,13 @@ int main()
             cout << result[i] + "\n";
         }
     }
+    cout << endl << endl;
+    ObjectCodeHandler oo;
+    vector<string> aa = oo.getObjectProgram();
+    for(int i = 0; i < aa.size(); i++){
+        cout << aa[i] << endl;
+    }
+
     cin >> in;
 
 

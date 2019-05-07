@@ -282,6 +282,13 @@ int Singleton::literalOperationsSize(string operation){
 
 }
 
+string Singleton::convertToAscii(string s){
+    string ascii;
+    for(int i = 0; i < s.size(); i++){
+            ascii += asciiTable[s[i]];
+        }
+    return ascii;
+}
 
 void Singleton::covertLiteralsToHexa(string literal){
     Instructions instruction;

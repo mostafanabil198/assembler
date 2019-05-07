@@ -22,58 +22,143 @@ void ObjectCodeHandler::generateObjectCode()
     vector<Instructions> instructions = tables->getAllInstructions();
     for(int i=0; i<instructions.size(); i++)
     {
-        if(instructions[i].getError() != "" || instructions[i].getOperation() == "end" || instructions[i].getOperation() == "resb" ||instructions[i].getOperation() == "resw")
+        string op = instructions[i].getOperation();
+        if(instructions[i].getError() != "" || op == "end" || op == "org" || op == "resb" || op == "resw" || op == "equ" || op == "ltorg" || op == "base" || op == "nobase")
         {
-            if(instructions[i].getOperation() == "end"){
-                    string record = "E";
-                    if(tables->symbol_table_contains(instructions[i].getLabel())){
-                            record+= "000001";
-                    } else {
-                        int ad = tables->symbol_table_get(instructions[i].getLabel());
-                        std::string out_string;
-                        std::stringstream ss;
-                        ss << ad;
-                        out_string = ss.str();
-                        while(out_string.length() < 6){
-                            out_string = "0" + out_string;
-                        }
-                        record += out_string;
+            if(instructions[i].getOperation() == "end")
+            {
+                string record = "E^";
+                if(tables->symbol_table_contains(instructions[i].getLabel()))
+                {
+                    record+= "000001";
+                }
+                else
+                {
+                    int ad = tables->symbol_table_get(instructions[i].getLabel());
+                    std::string out_string;
+                    std::stringstream ss;
+                    ss << ad;
+                    out_string = ss.str();
+                    while(out_string.length() < 6)
+                    {
+                        out_string = "0" + out_string;
                     }
+                    record += out_string;
+                }
                 tables->setEndRecord(record);
             }
 
-            if((instructions[i].getOperation() == "resw" || instructions[i].getOperation() == "resb") && tRecord.length() > 0) {
+            if((op == "resw" || op == "resb" || op == "org") && tRecord.length() > 0)
+            {
                 tables->addTRecord(startA,tRecord);
                 tRecord = "";
                 startA = "";
             }
             continue;
         }
+
+        if(instructions[i].getOperation() == "byte")
+        {
+            string objectCode;
+            if(instructions[i].getOperand().find("x'") != std::string::npos)
+            {
+                objectCode = instructions[i].getOperand().substr(2, instructions[i].getOperand().length()-3);
+            }
+            else
+            {
+                string objectCodeC = instructions[i].getOperand().substr(2, instructions[i].getOperand().length()-3);
+                objectCode = tables->convertToAscii(objectCodeC);
+            }
+            instructions[i].setObjectCode(objectCode);
+            if(tRecord.length() + objectCode.length() <= 60)
+            {
+                if(tRecord.length() == 0)
+                {
+                    startA = to_hexa(instructions[i].getAdress());
+                }
+                tRecord += objectCode;
+            }
+            else
+            {
+                tables->addTRecord(startA,tRecord);
+                tRecord = objectCode;
+                startA = to_hexa(instructions[i].getAdress());
+            }
+            continue;
+        }
+        else if(instructions[i].getOperation() == "word")
+        {
+            string objectCodeC = instructions[i].getOperand();
+            string objectCode;
+            string nums = "[0-9]+";
+            regex numsR(nums,regex_constants::icase);
+            if(regex_match(objectCodeC,numsR))
+            {
+                objectCode = tables->convertToAscii(objectCodeC);
+                while(objectCode.length() < 6)
+                {
+                    objectCode = "0" + objectCode;
+                }
+            }
+            else
+            {
+                objectCode = "000000";
+            }
+            instructions[i].setObjectCode(objectCode);
+            if(tRecord.length() + objectCode.length() <= 60)
+            {
+                if(tRecord.length() == 0)
+                {
+                    startA = to_hexa(instructions[i].getAdress());
+                }
+                tRecord += objectCode;
+            }
+            else
+            {
+                tables->addTRecord(startA,tRecord);
+                tRecord = objectCode;
+                startA = to_hexa(instructions[i].getAdress());
+            }
+            continue;
+        }
+
+
 //---------------------------------
 // lsa fl start fadl a5r goz2 azwdo fl record ali hwa l size bta3 l object code kolo
-        if(instructions[i].getOperation() == "start"){
-            string record = "H" + instructions[i].getLabel();
-            while(record.length() < 7){
+        if(instructions[i].getOperation() == "start")
+        {
+            string record = "H^" + instructions[i].getLabel();
+            while(record.length() < 7)
+            {
                 record += " ";
             }
-            record += "^" + instructions[i].getOperand();
+            string o = instructions[i].getOperand();
+            while(o.length() < 6){
+                o = "0" + o;
+            }
+            record += "^" + o + "^";
             tables->setHeaderRecord(record);
         }
+
         int format = tables->operationFormat(instructions[i].getOperation());
         switch(format)
         {
         case 1:
         {
             instructions[i].setObjectCode(tables->getOpCode(instructions[i].getOperation()));
-            if(tRecord.length() + tables->getOpCode(instructions[i].getOperation()).length() <= 60){
-                    if(tRecord.length() == 0){
-                        startA = to_hexa(instructions[i].getAdress());
-                    }
+            if(tRecord.length() + tables->getOpCode(instructions[i].getOperation()).length() <= 60)
+            {
+                if(tRecord.length() == 0)
+                {
+                    startA = to_hexa(instructions[i].getAdress());
+                }
                 tRecord += tables->getOpCode(instructions[i].getOperation());
-            } else {
+            }
+            else
+            {
                 tables->addTRecord(startA,tRecord);
-                tRecord = "";
-                startA = "";
+                tRecord = tables->getOpCode(instructions[i].getOperation());
+                startA = to_hexa(instructions[i].getAdress());
             }
         }
         break;
@@ -98,25 +183,51 @@ void ObjectCodeHandler::generateObjectCode()
             }
             else
             {
-                objectCode += tables->getRegesterCode(instructions[i].getOperand());
+                std::stringstream ss;
+                ss << tables->getRegesterCode(instructions[i].getOperand());
+                objectCode += ss.str();
                 objectCode += "0";
             }
 
             instructions[i].setObjectCode(objectCode);
-            if(tRecord.length() + objectCode.length() <= 60){
-                if(tRecord.length() == 0){
+            if(tRecord.length() + objectCode.length() <= 60)
+            {
+                if(tRecord.length() == 0)
+                {
                     startA = to_hexa(instructions[i].getAdress());
                 }
                 tRecord += objectCode;
-            } else {
+            }
+            else
+            {
                 tables->addTRecord(startA,tRecord);
-                tRecord = "";
-                startA = "";
+                tRecord = objectCode;
+                startA = to_hexa(instructions[i].getAdress());
             }
         }
         break;
         case 3:
         {
+            if(instructions[i].getOperation() == "rsub")
+            {
+                string objectCode = "4F0000";
+                instructions[i].setObjectCode(objectCode);
+                if(tRecord.length() + objectCode.length() <= 60)
+                {
+                    if(tRecord.length() == 0)
+                    {
+                        startA = to_hexa(instructions[i].getAdress());
+                    }
+                    tRecord += objectCode;
+                }
+                else
+                {
+                    tables->addTRecord(startA,tRecord);
+                    tRecord = objectCode;
+                    startA = to_hexa(instructions[i].getAdress());
+                }
+                continue;
+            }
             bool numb = false;
             string opCodeH = tables->getOpCode(instructions[i].getOperation());
             string opCodeB = hex_str_to_bin_str(opCodeH);
@@ -166,89 +277,116 @@ void ObjectCodeHandler::generateObjectCode()
 
 
             int PC = instructions[i+1].getAdress();
-            if(!(i1 == "1" && n == "0" && numb)){
-            if((TA - PC) > 2047 || (TA - PC) < -2048)
+            if(!(i1 == "1" && n == "0" && numb))
             {
-                if(!instructions[i].getBase())
+                if((TA - PC) > 2047 || (TA - PC) < -2048)
                 {
-                    p="1";
-                    cout << instructions[i].getAdress() << " " << instructions[i].getLabel() << "  " << instructions[i].getOperation() << "  " << instructions[i].getOperand() << endl;
-                    instructions[i].setError2("Displacement out of range");
-                    continue;
-                }
-                else
-                {
-                    b="1";
-                    int B1;
-                    if(isdigit(instructions[i].getBaseL()[0]))
+                    if(!instructions[i].getBase())
                     {
-                        B1 = std::stoi( instructions[i].getBaseL() );
-                    }
-                    else
-                    {
-    // msh 3arf mfrod a handle dol azai lw fe m3 base @ aw # aw kda
-                        if (instructions[i].getBaseL().find("#") != std::string::npos)
-                        {
-                            operand = instructions[i].getBaseL().substr(1, instructions[i].getBaseL().length()-1);
-                        }
-                        else if (instructions[i].getBaseL().find("@") != std::string::npos)
-                        {
-                            operand = instructions[i].getBaseL().substr(1, instructions[i].getBaseL().length()-1);
-                        }
-                        else
-                        {
-                            operand = instructions[i].getBaseL();
-                        }
-                        B1 = tables->symbol_table_get(operand);
-                    }
-
-                    if((TA-B1) < 0 || (TA-B1) > 4059) //base variable
-                    {
+                        p="1";
+                        //  cout << instructions[i].getAdress() << " " << instructions[i].getLabel() << "  " << instructions[i].getOperation() << "  " << instructions[i].getOperand() << endl;
                         instructions[i].setError2("Displacement out of range");
                         continue;
                     }
                     else
                     {
-                        TA=TA-B1; //base variable
+                        b="1";
+                        int B1;
+                        if(isdigit(instructions[i].getBaseL()[0]))
+                        {
+                            B1 = std::stoi( instructions[i].getBaseL() );
+                        }
+                        else
+                        {
+                            // msh 3arf mfrod a handle dol azai lw fe m3 base @ aw # aw kda
+                            if (instructions[i].getBaseL().find("#") != std::string::npos)
+                            {
+                                operand = instructions[i].getBaseL().substr(1, instructions[i].getBaseL().length()-1);
+                            }
+                            else if (instructions[i].getBaseL().find("@") != std::string::npos)
+                            {
+                                operand = instructions[i].getBaseL().substr(1, instructions[i].getBaseL().length()-1);
+                            }
+                            else
+                            {
+                                operand = instructions[i].getBaseL();
+                            }
+                            B1 = tables->symbol_table_get(operand);
+                        }
 
+                        if((TA-B1) < 0 || (TA-B1) > 4059) //base variable
+                        {
+                            instructions[i].setError2("Displacement out of range");
+                            continue;
+                        }
+                        else
+                        {
+                            TA=TA-B1; //base variable
+
+                        }
                     }
                 }
-            }
-            else
-            {
-                TA=TA-PC;
-                p="1";
-            }
+                else
+                {
+                    TA=TA-PC;
+                    p="1";
+                }
             }
             opCodeB+=x;
             opCodeB+=b;
             opCodeB+=p;
             opCodeB+=e;
             opCodeB+=toBinary(twos(TA,12));
+            // cout << "3 " << TA << " " << toBinary(twos(TA,12)) << endl;
             string objectCode = bin_str_to_hex_str(opCodeB);
 
             std::stringstream sss;
             sss << "n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
             instructions[i].setNixbpe(sss.str());
             //objectCode= "n:" + n + "i:" + i + "x:" + x + "b:" + b + "e:" + e + "  " + objectCode;
-            instructions[i].setObjectCode(objectCode);
             //instructions[i].setObjectCode(objectCode);
 
-            if(tRecord.length() + objectCode.length() <= 60){
-                if(tRecord.length() == 0){
+            instructions[i].setObjectCode(objectCode);
+            if(tRecord.length() + objectCode.length() <= 60)
+            {
+                if(tRecord.length() == 0)
+                {
                     startA = to_hexa(instructions[i].getAdress());
                 }
                 tRecord += objectCode;
-            } else {
+            }
+            else
+            {
                 tables->addTRecord(startA,tRecord);
-                tRecord = "";
-                startA = "";
+                tRecord = objectCode;
+                startA = to_hexa(instructions[i].getAdress());
             }
 
         }
         break;
         case 4:
         {
+            if(instructions[i].getOperation() == "+rsub")
+            {
+                string objectCode = "4F000000";
+                instructions[i].setObjectCode(objectCode);
+                if(tRecord.length() + objectCode.length() <= 60)
+                {
+                    if(tRecord.length() == 0)
+                    {
+                        startA = to_hexa(instructions[i].getAdress());
+                    }
+                    tRecord += objectCode;
+                }
+                else
+                {
+                    tables->addTRecord(startA,tRecord);
+                    tRecord = objectCode;
+                    startA = to_hexa(instructions[i].getAdress());
+                }
+                continue;
+            }
+
             string opCodeH = tables->getOpCode(instructions[i].getOperation());
             string opCodeB = hex_str_to_bin_str(opCodeH);
             opCodeB = opCodeB.substr(0, 6);
@@ -297,22 +435,32 @@ void ObjectCodeHandler::generateObjectCode()
             opCodeB+=b;
             opCodeB+=p;
             opCodeB+=e;
-            opCodeB+=toBinary(TA);
+            string xx = toBinary(twos(TA,20));
+            while(xx.length() < 20)
+            {
+                xx = "0" + xx;
+            }
+            opCodeB+= xx;
+            //cout << "4 " << TA << " " << toBinary(twos(TA,20)) << " " << opCodeB << endl;
             string objectCode = bin_str_to_hex_str(opCodeB);
             std::stringstream sss;
             sss << "n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
             instructions[i].setNixbpe(sss.str());
             instructions[i].setObjectCode(objectCode);
 
-            if(tRecord.length() + objectCode.length() <= 60){
-                if(tRecord.length() == 0){
+            if(tRecord.length() + objectCode.length() <= 60)
+            {
+                if(tRecord.length() == 0)
+                {
                     startA = to_hexa(instructions[i].getAdress());
                 }
                 tRecord += objectCode;
-            } else {
+            }
+            else
+            {
                 tables->addTRecord(startA,tRecord);
-                tRecord = "";
-                startA = "";
+                tRecord = objectCode;
+                startA = to_hexa(instructions[i].getAdress());
             }
         }
         break;
@@ -321,12 +469,45 @@ void ObjectCodeHandler::generateObjectCode()
         }
     }
     tables->setAllInstructions(instructions);
-    if(tRecord.length() > 0){
+    if(tRecord.length() > 0)
+    {
         tables->addTRecord(startA,tRecord);
     }
 }
 
-string ObjectCodeHandler::to_hexa(int ad){
+
+
+vector<string> ObjectCodeHandler::getObjectProgram(){
+    vector<string> objectProgram;
+    string record;
+    int programL = 0;
+    vector<pair<string,string>> textRecords = tables->getTextRecords();
+    for(int i = 0; i < textRecords.size(); i++){
+        record = "T";
+        string startAd = textRecords[i].first;
+        while(startAd.length() < 6){
+            startAd = "0" + startAd;
+        }
+        programL += textRecords[i].second.length();
+        string recordL = to_hexa(textRecords[i].second.length());
+        record += "^" + startAd + "^" + recordL + "^" + textRecords[i].second;
+        objectProgram.push_back(record);
+    }
+    objectProgram.push_back(tables->getEndRecord());
+    string programLH = to_hexa(programL);
+    record = tables->getHeaderRecord();
+    while(programLH.length() < 6){
+        programLH = "0" + programLH;
+    }
+    record+= programLH;
+    objectProgram.insert(objectProgram.begin(),record);
+
+    return objectProgram;
+}
+
+
+string ObjectCodeHandler::to_hexa(int ad)
+{
     std::stringstream sstream;
     sstream << std::hex << ad;
     return sstream.str();
@@ -406,6 +587,7 @@ const char* ObjectCodeHandler::bin_char_to_hex(string c)
 
 string ObjectCodeHandler::bin_str_to_hex_str(const std::string& bin)
 {
+
     // TODO use a loop from <algorithm> or smth
     std::string hex;
     for(unsigned i = 0; i != bin.length(); i+=4)
@@ -415,14 +597,16 @@ string ObjectCodeHandler::bin_str_to_hex_str(const std::string& bin)
     return hex;
 }
 
-int ObjectCodeHandler::twos(int num, int bits){
+int ObjectCodeHandler::twos(int num, int bits)
+{
     if(num >= 0)
         return num;
     num = abs(num);
     int t = 0;
     int start = 1;
     int result = 0;
-    while(num){
+    while(num)
+    {
         int d = num % 2;
         num /= 2;
         if(!d)
@@ -430,7 +614,8 @@ int ObjectCodeHandler::twos(int num, int bits){
         start *= 2;
         t++;
     }
-    while(t < bits){
+    while(t < bits)
+    {
         t++;
         result += start;
         start *= 2;
@@ -451,3 +636,5 @@ string ObjectCodeHandler::toBinary(int n)
     }
     return r;
 }
+
+

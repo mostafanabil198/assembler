@@ -13,7 +13,7 @@
 	<bits/stdc++.h>
 	<regex>
 
-1557167829 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
+1557242764 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
 	<iostream>
 	<Singleton.h>
 	<bits/stdc++.h>
@@ -27,13 +27,13 @@
 1557238760 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
-1557224950 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
+1557260708 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
 	<iostream>
 	<bits/stdc++.h>
 	<Singleton.h>
 	<string>
 
-1557224847 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
+1557262613 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
 	<iostream>
 	<Instructions.h>
 
@@ -66,7 +66,7 @@
 	<Singleton.h>
 	<Validate.h>
 
-1557228784 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
+1557266221 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
 	<iostream>
 	<regex>
 	<Parser.h>
@@ -133,7 +133,7 @@
 
 1557149273 ons.h"
 
-1557239093 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+1557266072 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>
@@ -142,7 +142,7 @@
 	<Singleton.h>
 	<string>
 
-1557237517 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
+1557266018 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
 	"ObjectCodeHandler.h"
 	<bits/stdc++.h>
 	<iostream>
@@ -151,7 +151,7 @@
 
 1557175564 85177c872053a15f6a46a072379e26139b1e6
 
-1557228446 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\expressionevaluator.cpp
+1557241000 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\expressionevaluator.cpp
 	"ExpressionEvaluator.h"
 	<iostream>
 	<Instructions.h>

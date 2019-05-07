@@ -44,6 +44,7 @@ class Singleton {
     vector<pair<string,string>> getTextRecords();
     void addTRecord(string ad, string objectCodes);
     string symbol_table_get_type(string symbol);
+    string convertToAscii(string s);
 
 
 

@@ -15,6 +15,7 @@ class ObjectCodeHandler
     public:
         ObjectCodeHandler();
         void generateObjectCode();
+        vector<string> getObjectProgram();
     protected:
 
     private:
