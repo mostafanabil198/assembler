@@ -34,6 +34,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/ExpressionEvaluator.h" />
 		<Unit filename="include/Files.h" />
 		<Unit filename="include/Instructions.h" />
 		<Unit filename="include/ObjectCodeHandler.h" />
@@ -41,6 +42,7 @@
 		<Unit filename="include/Singleton.h" />
 		<Unit filename="include/Validate.h" />
 		<Unit filename="pass1.cpp" />
+		<Unit filename="src/ExpressionEvaluator.cpp" />
 		<Unit filename="src/Files.cpp" />
 		<Unit filename="src/Instructions.cpp" />
 		<Unit filename="src/ObjectCodeHandler.cpp" />
