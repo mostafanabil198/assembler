@@ -15,7 +15,7 @@ class Files
     public:
         Files();
         void readFromFile(string fileName);
-        vector<string> print(vector<Instructions> given);
+        vector<string> print(vector<Instructions> given, bool pass1);
     protected:
 
     private:

@@ -33,6 +33,8 @@ void Singleton::initTables()
 {
 
     endb = false;
+    error = false;
+
     //DIRECTIVES
     dirTable["start"]= "";
     dirTable["byte"]= "";

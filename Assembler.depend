@@ -27,7 +27,7 @@
 1557238760 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
-1557260708 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
+1557313764 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
 	<iostream>
 	<bits/stdc++.h>
 	<Singleton.h>
@@ -37,7 +37,7 @@
 	<iostream>
 	<Instructions.h>
 
-1557146133 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\validate.cpp
+1557309698 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\validate.cpp
 	<Validate.h>
 	<Singleton.h>
 	<bits/stdc++.h>
@@ -47,7 +47,7 @@
 	<Instructions.h>
 	<Singleton.h>
 
-1557229061 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
+1557313704 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
 	"Files.h"
 	<iostream>
 	<fstream>
@@ -56,7 +56,7 @@
 	<Instructions.h>
 	<ObjectCodeHandler.h>
 
-1556057832 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\files.h
+1557312065 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\files.h
 	<iostream>
 	<fstream>
 	<string>
@@ -66,7 +66,7 @@
 	<Singleton.h>
 	<Validate.h>
 
-1557266221 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
+1557314015 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
 	<iostream>
 	<regex>
 	<Parser.h>
@@ -133,7 +133,7 @@
 
 1557149273 ons.h"
 
-1557267011 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+1557313145 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>

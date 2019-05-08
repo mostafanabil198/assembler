@@ -1,0 +1,31 @@
+.234567890123456789
+as       Start   10
+         BASE    @10
+         LDA     100
+         compr   sw,t
+LOOP     LDCH    BLANK
+         STCH    STRI,X
+         TIX     #100
+A        EQU     100
+         ORG     LOOP
+         JLT     LOOP
+         J       *
+.
+asde     equ     A
+         ltorg   A
+         LDA     100
+         LDA     100
+         org     LOOP
+         LDA     100
+         LDA     100
+         base    LOOP
+STRI     resw    300
+asds     resb    10
+mm       word    LOOOOO
+BLANK    BYTE    C'mm'
+wmm      word    17
+BalNK    BYTE    C'iasj5'
+emm      word    LOOP
+fglNK    BYTE    x'ab45'
+cemm     word    A2
+         END

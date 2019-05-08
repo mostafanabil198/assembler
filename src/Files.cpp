@@ -39,9 +39,19 @@ void Files::readFromFile(string fileName)
         cout << "Unable to open file";
     }
 }
-vector<string> Files::print(vector<Instructions> given)
+vector<string> Files::print(vector<Instructions> given, bool pass1)
 {
     vector<string> answer;
+    if(!pass1 && tables->get_error()){
+        return answer;
+    }
+    string l= "Address ";
+
+    if(!pass1){
+        l.append("Obj code  ");
+    }
+    l.append("label  operation operand");
+    answer.push_back(l);
     for(int i=0; i<given.size(); i++)
     {
         std::stringstream sstream;
@@ -51,12 +61,29 @@ vector<string> Files::print(vector<Instructions> given)
         string operation=given[i].getOperation();
         string operand=given[i].getOperand();
         string line;
+        string objectCode = given[i].getObjectCode();
+        string nixbbe = given[i].getNixbpe();
+        string err2 = given[i].getError2();
         while(address.size()<6)
         {
             address.insert(0,"0");
         }
         line.append(address);
-        string spaces=" ";
+        string spaces;
+        if(!pass1){
+            if(!pass1 && err2 != ""){
+                answer.push_back("----------" + err2 + "--------------");
+            }
+            answer.push_back(nixbbe);
+            spaces = "  ";
+            spaces.append(objectCode);
+            while(spaces.size() < 11){
+                spaces.append(" ");
+            }
+        line.append(spaces);
+        }
+
+        spaces=" ";
         spaces.append(label);
         while(spaces.size()<10)
         {
@@ -71,14 +98,19 @@ vector<string> Files::print(vector<Instructions> given)
         }
         line.append(spaces);
         line.append(operand);
-        line.append("          -");
-        line.append(given[i].getObjectCode());
+
         answer.push_back(line);
         string err=given[i].getError();
         if(err!="")
         {
             tables->set_error(true);
             answer.push_back("----------" + err + "--------------");
+        }
+        if(!pass1 && err2 != ""){
+            answer.push_back("----------" + err2 + "--------------");
+        }
+        if(!pass1){
+            answer.push_back("");
         }
         if(operation == "end")
         {
@@ -120,9 +152,10 @@ vector<string> Files::print(vector<Instructions> given)
     if(!tables->get_end())
     {
         answer.push_back("error!! end must be exist");
+        tables->set_error(true);
     }
 
-    if(!tables->get_error()){
+    if(!tables->get_error() && pass1){
         answer.push_back("\n\n\n");
     answer.push_back("------------------ SYMBOL TABLE ----------------------\n\n");
 

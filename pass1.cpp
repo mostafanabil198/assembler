@@ -18,12 +18,18 @@ int main()
         tables->set_end(false);
         Files file;
         file.readFromFile(match.str(1));
-        vector<string> result = file.print(tables->getAllInstructions());
+        cout << endl << "------------ PASS ONE ------------" << endl;
+        vector<string> result = file.print(tables->getAllInstructions(),true);
+        for(int i = 0; i < result.size(); i++){
+            cout << result[i] + "\n";
+        }
+        cout << endl << endl << "------------- PASS TWO ------------" << endl;
+        result = file.print(tables->getAllInstructions(),false);
         for(int i = 0; i < result.size(); i++){
             cout << result[i] + "\n";
         }
     }
-    cout << endl << endl;
+    cout << endl << endl << "-------------- OBJECT PROGRAM ------------" << endl;
     ObjectCodeHandler oo;
     vector<string> aa = oo.getObjectProgram();
     for(int i = 0; i < aa.size(); i++){

@@ -341,7 +341,7 @@ void ObjectCodeHandler::generateObjectCode()
             string objectCode = bin_str_to_hex_str(opCodeB);
 
             std::stringstream sss;
-            sss << "n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
+            sss << "                    n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
             instructions[i].setNixbpe(sss.str());
             //objectCode= "n:" + n + "i:" + i + "x:" + x + "b:" + b + "e:" + e + "  " + objectCode;
             //instructions[i].setObjectCode(objectCode);
@@ -444,7 +444,7 @@ void ObjectCodeHandler::generateObjectCode()
             //cout << "4 " << TA << " " << toBinary(twos(TA,20)) << " " << opCodeB << endl;
             string objectCode = bin_str_to_hex_str(opCodeB);
             std::stringstream sss;
-            sss << "n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
+            sss << "                    n:" << n << "  i:" << i1 << "  x:" << x << "  b:" << b << "  p:" << p << "  e:" << e;
             instructions[i].setNixbpe(sss.str());
             instructions[i].setObjectCode(objectCode);
 
