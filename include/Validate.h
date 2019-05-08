@@ -10,6 +10,8 @@ public:
     int add = 0;
     bool start = false;
     bool end = false;
+    bool base = false;
+    string baseLabel = "";
     int count = 0;
     unordered_map<string,pair<int,string>> format2;
     Validate();

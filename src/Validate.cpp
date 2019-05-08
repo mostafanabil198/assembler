@@ -24,6 +24,8 @@ void Validate::table(Instructions i)
             {
                 if(i.getLabel()[0] == '.')
                 {
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                 }
                 else if(i.getOperation() == "start")
@@ -31,12 +33,16 @@ void Validate::table(Instructions i)
                     istringstream iss (hexaToInt(i.getOperand()));
                     iss >> add;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                 }
                 else if(format.find(i.getOperation()) != format.end())
                 {
                     add = 0;
                     start = true;
+                    i.setBase(base);
+                    i.setBaseL(baseLabel);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -52,6 +58,8 @@ void Validate::table(Instructions i)
                 {
                     add = 0;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -67,6 +75,8 @@ void Validate::table(Instructions i)
                 {
                     add = 0;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -114,6 +124,8 @@ void Validate::table(Instructions i)
                 {
                     add = 0;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -131,6 +143,8 @@ void Validate::table(Instructions i)
                 {
                     add = 0;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -148,6 +162,8 @@ void Validate::table(Instructions i)
                 {
                     add = 0;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -212,6 +228,8 @@ void Validate::table(Instructions i)
                 {
                     add = 0;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() == "")
                     {
@@ -246,22 +264,25 @@ void Validate::table(Instructions i)
                 }
                 else if(i.getOperation() == "ltorg")
                 {
-                    if(i.getLabel() =="")
-                    {
-                        add = 0;
-                        start = true;
-                        i.setAdress(add);
-                        literals = true;
-                    }
-                    else
+                    add = 0;
+                    start = true;
+                    i.setBaseL(baseLabel);
+                    i.setAdress(add);
+                    i.setBase(base);
+                    literals = true;
+                    if(i.getLabel() !="")
                     {
                         i.setError("cannot have a label");
                     }
                 }
                 else if(i.getOperation() == "base")
                 {
+                    baseLabel = i.getOperand();
                     add = 0;
+                    base = true;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -270,8 +291,12 @@ void Validate::table(Instructions i)
                 }
                 else if (i.getOperation() == "nobase")
                 {
+                    baseLabel = "";
+                    base = false;
                     add = 0;
                     start = true;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                     if(i.getLabel() != "")
                     {
@@ -286,11 +311,15 @@ void Validate::table(Instructions i)
                 {
                     start = true;
                     add = 0;
+                    i.setBaseL(baseLabel);
+                    i.setBase(base);
                     i.setAdress(add);
                 }
                 else
                 {
                     i.setError("wrong operation");
+                    i.setBase(base);
+                    i.setBaseL(baseLabel);
                     i.setAdress(add);
                 }
             }
@@ -300,6 +329,8 @@ void Validate::table(Instructions i)
                 {
                     if(i.getLabel()[0] == '.')
                     {
+                        i.setBase(base);
+                        i.setBaseL(baseLabel);
                         i.setAdress(add);
                     }
                     else if(i.getOperation()=="end")
@@ -307,11 +338,15 @@ void Validate::table(Instructions i)
                         end = true;
                         literals = true;
                         tables->set_end(true);
+                        i.setBase(base);
+                        i.setBaseL(baseLabel);
                         i.setAdress(add);
                     }
                     else if(format.find(i.getOperation()) != format.end())
                     {
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
 
                         if(i.getLabel() != "")
                         {
@@ -331,6 +366,8 @@ void Validate::table(Instructions i)
                     else if(i.getOperation() == "word")
                     {
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
                         if(i.getLabel() != "")
                         {
                             if(tables->symbol_table_contains(i.getLabel()))
@@ -349,6 +386,8 @@ void Validate::table(Instructions i)
                     else if(i.getOperation() == "byte")
                     {
                         bool byte = true;
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
                         i.setAdress(add);
                         if(i.getLabel() != "")
                         {
@@ -400,6 +439,8 @@ void Validate::table(Instructions i)
                     else if(i.getOperation() == "resw")
                     {
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
                         if(i.getLabel() != "")
                         {
                             if(tables->symbol_table_contains(i.getLabel()))
@@ -416,16 +457,19 @@ void Validate::table(Instructions i)
                                 i.setError("label name already exist");
                             }
                         }
-                    else{
-                        int num = 0;
-                        istringstream iss (i.getOperand());
-                        iss >> num;
-                        add = add + 3*num;
-                    }
+                        else
+                        {
+                            int num = 0;
+                            istringstream iss (i.getOperand());
+                            iss >> num;
+                            add = add + 3*num;
+                        }
                     }
                     else if(i.getOperation() == "resb")
                     {
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
                         if(i.getLabel() != "")
                         {
                             if(tables->symbol_table_contains(i.getLabel()))
@@ -442,16 +486,19 @@ void Validate::table(Instructions i)
                                 i.setError("label name already exist");
                             }
                         }
-                        else{
-                        int num = 0;
-                        istringstream iss (i.getOperand());
-                        iss >> num;
-                        add = add + 1*num;
+                        else
+                        {
+                            int num = 0;
+                            istringstream iss (i.getOperand());
+                            iss >> num;
+                            add = add + 1*num;
                         }
                     }
                     else if(i.getOperation() == "equ")
                     {
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
                         if(i.getLabel() != "")
                         {
                             if(tables->symbol_table_contains(i.getLabel()))
@@ -514,6 +561,8 @@ void Validate::table(Instructions i)
                     else if(i.getOperation() == "org")
                     {
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
                         if(i.getLabel() == "")
                         {
                             if(i.getOperand()[0] == '@' || i.getOperand()[0] == '#')
@@ -547,18 +596,26 @@ void Validate::table(Instructions i)
                     }
                     else if(i.getOperation() == "ltorg")
                     {
-                        if(i.getLabel() =="")
+                        i.setAdress(add);
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
+                       // literals = true;
+
+                        if(i.getLabel() !="")
                         {
-                            i.setAdress(add);
-                            literals = true;
-                        }
-                        else
-                        {
-                            i.setError("cannot have a label");
-                        }
+                              i.setError("cannot have a label");
+                        }else
+                              literals = true;
+
+
+
                     }
                     else if(i.getOperation() == "base")
                     {
+                        baseLabel = i.getOperand();
+                        base = true;
+                        i.setBase(base);
+                        i.setBaseL(baseLabel);
                         i.setAdress(add);
                         if(i.getLabel() != "")
                         {
@@ -567,6 +624,10 @@ void Validate::table(Instructions i)
                     }
                     else if (i.getOperation() == "nobase")
                     {
+                        baseLabel = "";
+                        base = false;
+                        i.setBaseL(baseLabel);
+                        i.setBase(base);
                         i.setAdress(add);
                         if(i.getLabel() != "")
                         {
@@ -580,11 +641,15 @@ void Validate::table(Instructions i)
                     else if(i.getOperation() == "use")
                     {
                         i.setAdress(add);
+                        i.setBase(base);
+                        i.setBaseL(baseLabel);
                     }
 
                     else
                     {
                         i.setAdress(add);
+                        i.setBase(base);
+                        i.setBaseL(baseLabel);
                         i.setError("wrong operation");
                     }
                 }
@@ -592,11 +657,15 @@ void Validate::table(Instructions i)
                 {
                     if(i.getLabel()[0] == '.')
                     {
+                        i.setBase(base);
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
                     }
                     else
                     {
+                        i.setBase(base);
                         i.setAdress(add);
+                        i.setBaseL(baseLabel);
                         i.setError("cannot write under end");
                     }
                 }
@@ -606,10 +675,14 @@ void Validate::table(Instructions i)
         {
             i.setError("label cannot be this name");
             i.setAdress(add);
+            i.setBaseL(baseLabel);
+            i.setBase(base);
         }
     }
     else
     {
+        i.setBase(base);
+        i.setBaseL(baseLabel);
         i.setAdress(add);
     }
     tables->addInstruction(i);
