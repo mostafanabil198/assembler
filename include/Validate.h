@@ -27,7 +27,7 @@ private:
     Singleton* tables;
     unordered_map<string,pair<int,string>> format;
     string hexaToInt(string hexa);
-    string doulbe_operands = "([A-Za-z][A-Za-z0-9]*)((\\+|-|\\*|\\/)([0-9]+|[A-Za-z][A-Za-z0-9]*))+";
+    string doulbe_operands = "([A-Za-z][A-Za-z0-9]*)((\\+|\\-|\\*|\\/)([0-9]+|[A-Za-z][A-Za-z0-9]*))+";
     ExpressionEvaluator evalutor;
 
 

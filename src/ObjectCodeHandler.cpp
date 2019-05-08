@@ -5,6 +5,7 @@
 #include <Instructions.h>
 #include <Singleton.h>
 #include <string>
+#include <ExpressionEvaluator.h>
 
 
 using namespace std;
@@ -17,6 +18,7 @@ ObjectCodeHandler::ObjectCodeHandler()
 
 void ObjectCodeHandler::generateObjectCode()
 {
+    ExpressionEvaluator expEv;
     string tRecord = "";
     string startA = "";
     vector<Instructions> instructions = tables->getAllInstructions();
@@ -133,7 +135,8 @@ void ObjectCodeHandler::generateObjectCode()
                 record += " ";
             }
             string o = instructions[i].getOperand();
-            while(o.length() < 6){
+            while(o.length() < 6)
+            {
                 o = "0" + o;
             }
             record += "^" + o + "^";
@@ -208,6 +211,7 @@ void ObjectCodeHandler::generateObjectCode()
         break;
         case 3:
         {
+            int TA;
             if(instructions[i].getOperation() == "rsub")
             {
                 string objectCode = "4F0000";
@@ -228,6 +232,31 @@ void ObjectCodeHandler::generateObjectCode()
                 }
                 continue;
             }
+
+            string doulbe_operands = "([A-Za-z][A-Za-z0-9]*)((\\+|\\-|\\*|\\/)([0-9]+|[A-Za-z][A-Za-z0-9]*))+";
+            regex dor(doulbe_operands,regex_constants::icase);
+            bool ex = false;
+            if(regex_match(instructions[i].getOperand(),dor))
+            {
+                pair<bool,string> resu = expEv.checkOperand(instructions[i]);
+                if(resu.first)
+                {
+                    TA = stoi(instructions[i].getObjectCode());
+                    if(TA < 0)
+                    {
+                        instructions[i].setError2("address cant be negative");
+                        tables->setError2(true);
+                        continue;
+                    }
+                    ex = true;
+                }
+                else
+                {
+                    instructions[i].setError2("invalid expression");
+                    tables->setError2(true);
+                    continue;
+                }
+            }
             bool numb = false;
             string opCodeH = tables->getOpCode(instructions[i].getOperation());
             string opCodeB = hex_str_to_bin_str(opCodeH);
@@ -244,6 +273,14 @@ void ObjectCodeHandler::generateObjectCode()
             {
                 operand = instructions[i].getOperand().substr(1, instructions[i].getOperand().length()-1);
                 n = "1";
+            }
+            else if (instructions[i].getOperand().find("=") != std::string::npos){
+                i1 = "1";
+                n = "1";
+                int ad = tables->getLiteralAddress(instructions[i].getOperand());
+                std::stringstream sss;
+                sss << ad;
+                operand = sss.str();
             }
             else
             {
@@ -262,20 +299,35 @@ void ObjectCodeHandler::generateObjectCode()
                 x = "1";
                 operand = operand.substr(0, instructions[i].getOperand().length()-2);
             }
-            int TA;
-            if(isdigit(operand[0]))
+
+            if(!ex)
             {
-                numb = true;
-                TA = std::stoi( operand );
-            }
-            else
-            {
-                if (instructions[i].getOperand() == "*"){
-                    TA = instructions[i].getAdress();
-                } else {
-                    TA = tables->symbol_table_get(operand);
+                if(isdigit(operand[0]))
+                {
+                    numb = true;
+                    TA = std::stoi( operand );
                 }
-                numb = false;
+                else
+                {
+                    if (instructions[i].getOperand() == "*")
+                    {
+                        TA = instructions[i].getAdress();
+                    }
+                    else
+                    {
+                        if(!tables->symbol_table_contains(operand))
+                        {
+                            TA = tables->symbol_table_get(operand);
+                        }
+                        else
+                        {
+                            instructions[i].setError2("not defined label");
+                            tables->setError2(true);
+                            continue;
+                        }
+                    }
+                    numb = false;
+                }
             }
 
 
@@ -290,6 +342,7 @@ void ObjectCodeHandler::generateObjectCode()
                         p="1";
                         //  cout << instructions[i].getAdress() << " " << instructions[i].getLabel() << "  " << instructions[i].getOperation() << "  " << instructions[i].getOperand() << endl;
                         instructions[i].setError2("Displacement out of range");
+                        tables->setError2(true);
                         continue;
                     }
                     else
@@ -315,9 +368,12 @@ void ObjectCodeHandler::generateObjectCode()
                             {
                                 operand = instructions[i].getBaseL();
                             }
-                            if (operand == "*"){
+                            if (operand == "*")
+                            {
                                 B1 = instructions[i].getAdress();
-                            } else {
+                            }
+                            else
+                            {
                                 B1 = tables->symbol_table_get(operand);
                             }
                         }
@@ -325,6 +381,7 @@ void ObjectCodeHandler::generateObjectCode()
                         if((TA-B1) < 0 || (TA-B1) > 4059) //base variable
                         {
                             instructions[i].setError2("Displacement out of range");
+                            tables->setError2(true);
                             continue;
                         }
                         else
@@ -436,10 +493,22 @@ void ObjectCodeHandler::generateObjectCode()
             }
             else
             {
-                if (instructions[i].getOperand() == "*"){
+                if (instructions[i].getOperand() == "*")
+                {
                     TA = instructions[i].getAdress();
-                } else {
-                    TA = tables->symbol_table_get(operand);
+                }
+                else
+                {
+                    if(!tables->symbol_table_contains(operand))
+                    {
+                        TA = tables->symbol_table_get(operand);
+                    }
+                    else
+                    {
+                        instructions[i].setError2("not defined label");
+                        tables->setError2(true);
+                        continue;
+                    }
                 }
                 //TA = tables->symbol_table_get(operand);
             }
@@ -490,15 +559,18 @@ void ObjectCodeHandler::generateObjectCode()
 
 
 
-vector<string> ObjectCodeHandler::getObjectProgram(){
+vector<string> ObjectCodeHandler::getObjectProgram()
+{
     vector<string> objectProgram;
     string record;
     int programL = 0;
     vector<pair<string,string>> textRecords = tables->getTextRecords();
-    for(int i = 0; i < textRecords.size(); i++){
+    for(int i = 0; i < textRecords.size(); i++)
+    {
         record = "T";
         string startAd = textRecords[i].first;
-        while(startAd.length() < 6){
+        while(startAd.length() < 6)
+        {
             startAd = "0" + startAd;
         }
         programL += textRecords[i].second.length();
@@ -509,7 +581,8 @@ vector<string> ObjectCodeHandler::getObjectProgram(){
     objectProgram.push_back(tables->getEndRecord());
     string programLH = to_hexa(programL);
     record = tables->getHeaderRecord();
-    while(programLH.length() < 6){
+    while(programLH.length() < 6)
+    {
         programLH = "0" + programLH;
     }
     record+= programLH;

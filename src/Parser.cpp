@@ -92,8 +92,9 @@ Instructions Parser::parse(string line)
         i.setOperand(match.str(3));
         if(match.str(2) == "equ"){
             regex equ_operand_regex(equ_operand,regex_constants::icase);
-            if(!regex_match(match.str(3),equ_operand_regex)){
-               i.setError("invalid operand");
+             regex org_exp_regex(doulbe_operands,regex_constants::icase);
+            if(!regex_match(match.str(3),equ_operand_regex) && !regex_match(match.str(3),org_exp_regex)){
+                i.setError("invalid operand");
                }
         } else if (match.str(2) == "byte"){
             if(!regex_match(match.str(3),byte_operand_regex)){
@@ -111,7 +112,7 @@ Instructions Parser::parse(string line)
         i.setOperand(match.str(2));
         if(match.str(1) == "org"){
             regex org_operand_regex("(#|@)?" + label,regex_constants::icase);
-            regex org_exp_regex(doulbe_operands);
+            regex org_exp_regex(doulbe_operands,regex_constants::icase);
             if(!regex_match(match.str(2),org_operand_regex) && !regex_match(match.str(2),org_exp_regex)){
                i.setError("invalid operand");
                }

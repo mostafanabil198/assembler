@@ -30,8 +30,7 @@ void Files::readFromFile(string fileName)
 
         }
         inputFile.close();
-        ObjectCodeHandler o;
-        o.generateObjectCode();
+
 
     }
     else

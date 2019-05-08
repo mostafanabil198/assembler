@@ -45,6 +45,11 @@ class Singleton {
     void addTRecord(string ad, string objectCodes);
     string symbol_table_get_type(string symbol);
     string convertToAscii(string s);
+    void setError2(bool error2);
+    bool getError2();
+    int getLiteralAddress(string literal);
+    string getLiteralsToHexa(string literal);
+    void setLiteralAddress(string hexa, int address);
 
 
 
@@ -52,6 +57,7 @@ class Singleton {
 private:
 Singleton();
     string toUpper(string*);
+    bool error2;
     static Singleton *instance;
     unordered_map<string,string> dirTable;
     unordered_map<string,int> operationsWithLiterals;
@@ -60,12 +66,15 @@ Singleton();
     unordered_map<char,string> asciiTable;
     unordered_map<string,int> regesters;
     deque<Instructions> literals;
+    //key is hexa of literal , pairS is the literal itself, and PairI is the address of it
+    unordered_map<string,pair<string,int>> literals1;
     vector<Instructions> allInstructions;
     string headerRecord;
     string endRecord;
     bool error;
     bool endb;
     vector<pair<string,string>> textRecords;
+
 
 
 

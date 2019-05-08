@@ -16,7 +16,7 @@ pair<bool,string> ExpressionEvaluator::checkOperand(Instructions& inst)
     // finding all the match.
     for (sregex_iterator it = sregex_iterator(expression.begin(), expression.end(), re);
             it != sregex_iterator(); ++it)
-    {
+
         {
             smatch match;
             match = *it;
@@ -26,6 +26,9 @@ pair<bool,string> ExpressionEvaluator::checkOperand(Instructions& inst)
         regex constants_regex("[0-9]+");
         //smatch match;
         vector <pair<int,string>>valueTypeExpression;
+        //for(int i=0;i<expression_words.size();i++){
+         //   cout<<expression_words[i]<<endl;
+        //}
         for(int i=0; i<expression_words.size(); i++)
         {
             if(regex_match(expression_words[i],operations_regex) )
@@ -57,8 +60,10 @@ pair<bool,string> ExpressionEvaluator::checkOperand(Instructions& inst)
             {
                 if(!operations.empty())
                 {
-                    while(valueTypeExpression[i].first<=operations.top().first)
+                   // cout<<operations.size()<<endl;
+                    while(!operations.empty())
                     {
+                        if(valueTypeExpression[i].first<=operations.top().first){
                         pair<int,string>operandtwo=value.top();
                         value.pop();
                         pair<int,string>operandOne=value.top();
@@ -75,6 +80,9 @@ pair<bool,string> ExpressionEvaluator::checkOperand(Instructions& inst)
                             inst.setError("invalid expression on operands types");
                             pair<bool,string>ans=make_pair(false,"");
                             return ans;
+                        }
+                        }else{
+                        break;
                         }
                     }
                     operations.push(valueTypeExpression[i]);
@@ -118,12 +126,13 @@ pair<bool,string> ExpressionEvaluator::checkOperand(Instructions& inst)
         pair<int,string>expressionValue=value.top();
         value.pop();
         //convert string function
+       // cout<<"result of expression  "<<expressionValue.first<<endl;
         inst.setObjectCode(to_string(expressionValue.first));
         pair<bool,string>ans=make_pair(true,expressionValue.second);
         return ans;
 
     }
-}
+
 bool ExpressionEvaluator::checkExist(string operand)
 {
     return !(tables->symbol_table_contains(operand));
@@ -215,6 +224,7 @@ if(operandOne.second=="relocatable")
         {
             if(operandTwo.second=="absolute" || operandTwo.second=="constant")
             {
+               // cout<<"result= "<<operandOne.first-operandTwo.first<<endl;
                 pair<bool,pair<int,string>> answer=make_pair(true,make_pair(operandOne.first-operandTwo.first,"relocatable"));
                 return answer;
             }

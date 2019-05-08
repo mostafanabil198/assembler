@@ -34,6 +34,7 @@ void Singleton::initTables()
 
     endb = false;
     error = false;
+    error2 = false;
 
     //DIRECTIVES
     dirTable["start"]= "";
@@ -305,12 +306,49 @@ void Singleton::covertLiteralsToHexa(string literal){
         hexa = data;
         instruction.setAdress(data.size()/2);
     }
-    instruction.setLabel(hexa);
-    instruction.setOperation("LITERAL");
-    instruction.setOperand("***");
-    addLiteral(instruction);
+    if(literals1.find(hexa) == literals1.end()){
+        instruction.setLabel(hexa);
+        instruction.setOperation("LITERAL");
+        instruction.setOperand("***");
+        addLiteral(instruction);
+        literals1[hexa] = make_pair(literal,instruction.getAdress());
+    }
+    //std::stringstream sss;
+    //sss << "  " << literal << "  " << literals1[literal];
+    //cout << sss.str() << endl;
 }
 
+int Singleton::getLiteralAddress(string literal){
+
+    return literals1[getLiteralsToHexa(literal)].second;
+}
+
+void Singleton::setLiteralAddress(string hexa, int address){
+    literals1[hexa].second = address;
+}
+
+
+string Singleton::getLiteralsToHexa(string literal){
+    string data = literal.substr(3, literal.size()-4) ;
+    string hexa = "";
+    if(literal[1] == 'c'){
+        for(int i = 0; i < data.size(); i++){
+            hexa += asciiTable[data[i]];
+        }
+    } else {
+        hexa = data;
+    }
+    return hexa;
+}
+
+
+
+bool Singleton::getError2(){
+    return error2;
+}
+void Singleton::setError2(bool error2){
+    this->error2 = error2;
+}
 bool Singleton::get_end(){
     return endb;
 }

@@ -4,17 +4,24 @@ as       Start   10
          compr   sw,t
 LOOP     LDCH    BLANK
          STCH    STRI,X
-         TIX     #100
+p        TIX     #100
          LDA     =x'123456'
+a        equ     100
+bn       lda     p-loop
+         lda     loop
+mk       lda     a-10
+         lda     loop+a+2-1
+ol       lda     a*2
+         lda     a+loop
          lda     =c'abx'
          ldch    =x'12'
          ltorg
          ldb     #loop
          base    loop
+xxx      EQU     100
          nobase
 hh       J       *
-A        EQU     100
-         ORG     LOOP-A
+         ORG     LOOP
          JLT     LOOP
          J       *
 .
@@ -30,6 +37,9 @@ STRI     resw    300
 asds     resb    10
 mm       word    LOOOOO
 BLANK    BYTE    C'mm'
+	 lda     =c'abm'
+	 lda     =c'abf'
+	 lda     =c'aqx'
 wmm      word    17
 BalNK    BYTE    C'iasj5'
 emm      word    LOOP

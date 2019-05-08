@@ -209,7 +209,12 @@ void Validate::table(Instructions i)
                                 pair<bool, string> result = evalutor.checkOperand(i);
                                 if(result.first)
                                 {
-                                    tables->symbol_table_add(i.getLabel(),stoi(i.getObjectCode()),result.second);
+                                   int objectCodevalue=stoi(i.getObjectCode());
+                                        if(objectCodevalue<0){
+                                            i.setError("address can't be negative");
+                                        }else{
+                                        tables->symbol_table_add(i.getLabel(),stoi(i.getObjectCode()),result.second);
+                                        }
                                 }
                             }
                             else if(isalpha(i.getOperand()[0]))
@@ -263,7 +268,12 @@ void Validate::table(Instructions i)
                             {
                                 if(result.second == "relocatable")
                                 {
-                                    add = stoi(i.getObjectCode());
+                                   int objectCodevalue=stoi(i.getObjectCode());
+                                        if(objectCodevalue<0){
+                                            i.setError("address can't be negative");
+                                        }else{
+                                        add = stoi(i.getObjectCode());
+                                        }
                                 }
                                 else
                                 {
@@ -569,7 +579,12 @@ void Validate::table(Instructions i)
                                     pair<bool, string> result = evalutor.checkOperand(i);
                                     if(result.first)
                                     {
+                                        int objectCodevalue=stoi(i.getObjectCode());
+                                        if(objectCodevalue<0){
+                                            i.setError("address can't be negative");
+                                        }else{
                                         tables->symbol_table_add(i.getLabel(),stoi(i.getObjectCode()),result.second);
+                                        }
                                     }
                                 }
 
@@ -622,7 +637,12 @@ void Validate::table(Instructions i)
                                 {
                                     if(result.second == "relocatable")
                                     {
+                                        int objectCodevalue=stoi(i.getObjectCode());
+                                        if(objectCodevalue<0){
+                                            i.setError("address can't be negative");
+                                        }else{
                                         add = stoi(i.getObjectCode());
+                                        }
                                     }
                                     else
                                     {
@@ -748,8 +768,10 @@ void Validate::table(Instructions i)
             Instructions literal = tables->getLiteral();
             int increment = literal.getAdress();
             literal.setAdress(add);
+            tables->setLiteralAddress(literal.getLabel(),add);
             add += increment;
             tables->addInstruction(literal);
+
         }
     }
 }

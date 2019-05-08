@@ -7,13 +7,13 @@
 	<Files.h>
 	<Singleton.h>
 
-1557323074 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\parser.cpp
+1557328057 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\parser.cpp
 	"Parser.h"
 	<iostream>
 	<bits/stdc++.h>
 	<regex>
 
-1557320445 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
+1557324061 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
 	<iostream>
 	<Singleton.h>
 	<bits/stdc++.h>
@@ -27,27 +27,28 @@
 1557238760 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\instructions.cpp
 	"Instructions.h"
 
-1557313764 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
+1557342922 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\singleton.cpp
 	<iostream>
 	<bits/stdc++.h>
 	<Singleton.h>
 	<string>
 
-1557262613 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
+1557342790 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\singleton.h
 	<iostream>
 	<Instructions.h>
 
-1557309698 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\validate.cpp
+1557343121 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\validate.cpp
 	<Validate.h>
 	<Singleton.h>
 	<bits/stdc++.h>
 	<string>
 
-1557309716 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\validate.h
+1557324961 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\validate.h
 	<Instructions.h>
 	<Singleton.h>
+	<ExpressionEvaluator.h>
 
-1557313704 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
+1557343665 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\files.cpp
 	"Files.h"
 	<iostream>
 	<fstream>
@@ -66,7 +67,7 @@
 	<Singleton.h>
 	<Validate.h>
 
-1557314015 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
+1557337846 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\pass1.cpp
 	<iostream>
 	<regex>
 	<Parser.h>
@@ -133,7 +134,7 @@
 
 1557149273 ons.h"
 
-1557318470 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+1557340675 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>
@@ -141,6 +142,7 @@
 	<Instructions.h>
 	<Singleton.h>
 	<string>
+	<ExpressionEvaluator.h>
 
 1557266018 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\objectcodehandler.h
 	"ObjectCodeHandler.h"
@@ -151,7 +153,7 @@
 
 1557175564 85177c872053a15f6a46a072379e26139b1e6
 
-1557241000 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\expressionevaluator.cpp
+1557337583 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\expressionevaluator.cpp
 	"ExpressionEvaluator.h"
 	<iostream>
 	<Instructions.h>
