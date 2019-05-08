@@ -1,0 +1,24 @@
+copy start 0
+first stl retadr
+ldb #length
+base length
+cloop +lda #10
+lda length
+comp #0
+jeq endfil
+lda wrrec
+fix
+j cloop
+endfil lda eof
+sta buffer
+lda #3
+sta length
+lda wrrec
+fix
+j @retadr
+eof byte c'eof'
+retadr resw 1
+length resw 1
+buffer resb 4096
+wrrec equ 4189
+end

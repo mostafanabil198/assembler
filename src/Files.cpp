@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <Instructions.h>
+#include <ObjectCodeHandler.h>
 using namespace std;
 
 Files::Files()
@@ -29,6 +30,9 @@ void Files::readFromFile(string fileName)
 
         }
         inputFile.close();
+        ObjectCodeHandler o;
+        o.generateObjectCode();
+
     }
     else
     {
@@ -67,6 +71,8 @@ vector<string> Files::print(vector<Instructions> given)
         }
         line.append(spaces);
         line.append(operand);
+        line.append("          -");
+        line.append(given[i].getObjectCode());
         answer.push_back(line);
         string err=given[i].getError();
         if(err!="")

@@ -6,7 +6,7 @@ Instructions::Instructions()
     operation= "";
     operand= "";
     error= "";
-    op= "";
+    objectCode = "";
     adress = 0;
 }
 
@@ -16,6 +16,9 @@ int Instructions::getAdress(){
 
 string Instructions::getError(){
     return error;
+}
+string Instructions::getError2(){
+    return error2;
 }
 
 string Instructions::getLabel(){
@@ -30,8 +33,8 @@ string Instructions::getOperation(){
     return operation;
 }
 
-string Instructions::getOP(){
-    return error;
+string Instructions::getObjectCode(){
+    return objectCode;
 }
 
 bool Instructions::getBase(){
@@ -40,6 +43,14 @@ bool Instructions::getBase(){
 
 void Instructions::setBase(bool base){
     this->base = base;
+}
+
+string Instructions::getBaseL(){
+    return baseL;
+}
+
+void Instructions::setBaseL(string baseL){
+    this->baseL = baseL;
 }
 
 
@@ -54,15 +65,26 @@ void Instructions::setOperation(string operation){
 void Instructions::setError(string error){
     this->error = error;
 }
+void Instructions::setError2(string error){
+    this->error2 = error;
+}
 
 void Instructions::setOperand(string operand){
     this->operand = operand;
 }
 
-void Instructions::setOp(string op){
-    this->op = op;
+void Instructions::setObjectCode(string opeeee){
+    this->objectCode = opeeee;
 }
 
 void Instructions::setLabel(string label){
     this->label = label;
 }
+
+void Instructions::setNixbpe(string nixbpe){
+    this->nixbpe = nixbpe;
+}
+string Instructions::getNixbpe(){
+        return nixbpe;
+}
+
