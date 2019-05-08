@@ -117,6 +117,7 @@ pair<bool,string> ExpressionEvaluator::checkOperand(Instructions& inst)
         }
         pair<int,string>expressionValue=value.top();
         value.pop();
+        //convert string function
         inst.setObjectCode(to_string(expressionValue.first));
         pair<bool,string>ans=make_pair(true,expressionValue.second);
         return ans;
