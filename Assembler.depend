@@ -162,3 +162,63 @@
 	<instructions.h>
 	<singleton.h>
 
+1557153917 source:d:\2 year\2nd semester\systems programming\project\assembler\pass1.cpp
+	<iostream>
+	<regex>
+	<Parser.h>
+	<bits/stdc++.h>
+	<Files.h>
+	<Singleton.h>
+
+1557153917 d:\2 year\2nd semester\systems programming\project\assembler\include\parser.h
+	<iostream>
+	<Singleton.h>
+	<bits/stdc++.h>
+	<regex>
+	<Instructions.h>
+
+1557153917 d:\2 year\2nd semester\systems programming\project\assembler\include\singleton.h
+	<iostream>
+	<Instructions.h>
+
+1557153917 d:\2 year\2nd semester\systems programming\project\assembler\include\instructions.h
+	<bits/stdc++.h>
+	<string>
+
+1557153917 d:\2 year\2nd semester\systems programming\project\assembler\include\files.h
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<Instructions.h>
+	<Parser.h>
+	<Singleton.h>
+	<Validate.h>
+
+1557162245 d:\2 year\2nd semester\systems programming\project\assembler\include\validate.h
+	<Instructions.h>
+	<Singleton.h>
+
+1557153917 source:d:\2 year\2nd semester\systems programming\project\assembler\src\files.cpp
+	"Files.h"
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<Instructions.h>
+
+1557153917 source:d:\2 year\2nd semester\systems programming\project\assembler\src\instructions.cpp
+	"Instructions.h"
+
+1557153917 source:d:\2 year\2nd semester\systems programming\project\assembler\src\parser.cpp
+	"Parser.h"
+	<iostream>
+	<bits/stdc++.h>
+	<regex>
+
+1557153917 source:d:\2 year\2nd semester\systems programming\project\assembler\src\singleton.cpp
+	<iostream>
+	<bits/stdc++.h>
+	<Singleton.h>
+	<string>
+
