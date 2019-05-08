@@ -270,8 +270,12 @@ void ObjectCodeHandler::generateObjectCode()
             }
             else
             {
+                if (instructions[i].getOperand() == "*"){
+                    TA = instructions[i].getAdress();
+                } else {
+                    TA = tables->symbol_table_get(operand);
+                }
                 numb = false;
-                TA = tables->symbol_table_get(operand);
             }
 
 
@@ -311,7 +315,11 @@ void ObjectCodeHandler::generateObjectCode()
                             {
                                 operand = instructions[i].getBaseL();
                             }
-                            B1 = tables->symbol_table_get(operand);
+                            if (operand == "*"){
+                                B1 = instructions[i].getAdress();
+                            } else {
+                                B1 = tables->symbol_table_get(operand);
+                            }
                         }
 
                         if((TA-B1) < 0 || (TA-B1) > 4059) //base variable
@@ -428,7 +436,12 @@ void ObjectCodeHandler::generateObjectCode()
             }
             else
             {
-                TA = tables->symbol_table_get(operand);
+                if (instructions[i].getOperand() == "*"){
+                    TA = instructions[i].getAdress();
+                } else {
+                    TA = tables->symbol_table_get(operand);
+                }
+                //TA = tables->symbol_table_get(operand);
             }
 
             opCodeB+=x;

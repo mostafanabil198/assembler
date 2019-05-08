@@ -7,13 +7,13 @@
 	<Files.h>
 	<Singleton.h>
 
-1556974377 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\parser.cpp
+1557323074 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\parser.cpp
 	"Parser.h"
 	<iostream>
 	<bits/stdc++.h>
 	<regex>
 
-1557242764 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
+1557320445 d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\include\parser.h
 	<iostream>
 	<Singleton.h>
 	<bits/stdc++.h>
@@ -133,7 +133,7 @@
 
 1557149273 ons.h"
 
-1557313145 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
+1557318470 source:d:\kolya\2nd-year\2nd-term\systems programming\project\assembler\src\objectcodehandler.cpp
 	"ObjectCodeHandler.h"
 	<iostream>
 	<bits/stdc++.h>

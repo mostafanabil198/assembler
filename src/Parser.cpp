@@ -21,6 +21,7 @@ Instructions Parser::parse(string line)
     regex noLabel_with_operand_regex(noLabel_with_operand,regex_constants::icase);
     regex registers_regex(registers,regex_constants::icase);
     regex byte_operand_regex(byte_operand,regex_constants::icase);
+    regex ltorg_regex(ltorg,regex_constants::icase);
 
     Instructions i ;
     smatch match;
@@ -110,7 +111,8 @@ Instructions Parser::parse(string line)
         i.setOperand(match.str(2));
         if(match.str(1) == "org"){
             regex org_operand_regex("(#|@)?" + label,regex_constants::icase);
-            if(!regex_match(match.str(2),org_operand_regex)){
+            regex org_exp_regex(doulbe_operands);
+            if(!regex_match(match.str(2),org_operand_regex) && !regex_match(match.str(2),org_exp_regex)){
                i.setError("invalid operand");
                }
         }else{
@@ -127,6 +129,11 @@ Instructions Parser::parse(string line)
         i.setOperation(match.str(3));
         i.setOperand(match.str(5));
         checkOperand(match.str(5),i);
+    }else if(regex_match(line,match,ltorg_regex)){
+    i.setLabel("");
+    i.setOperation(match.str(1));
+    i.setOperand("");
+
     }
     else
     {

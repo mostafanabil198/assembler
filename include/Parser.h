@@ -53,6 +53,8 @@ class Parser
         // =((c'[^']+')|(x'[a-f0-9]+'))
         string literals = "=((c'[^']+')|(x'[a-f0-9]+'))";
 
+        string ltorg = "\\s*(ltorg|nobase)\\s*";
+
         bool checkLabel(string label);
         void checkOperand(string operand, Instructions& i);
         string hexaToInt(string hexa);

@@ -1,13 +1,20 @@
 .234567890123456789
 as       Start   10
          BASE    @10
-         LDA     100
          compr   sw,t
 LOOP     LDCH    BLANK
          STCH    STRI,X
          TIX     #100
+         LDA     =x'123456'
+         lda     =c'abx'
+         ldch    =x'12'
+         ltorg
+         ldb     #loop
+         base    loop
+         nobase
+hh       J       *
 A        EQU     100
-         ORG     LOOP
+         ORG     LOOP-A
          JLT     LOOP
          J       *
 .
