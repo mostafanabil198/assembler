@@ -35,7 +35,7 @@ class Parser
         // (([A-Za-z][A-Za-z0-9]*)|([0-9]+)|(#|@)?\*),x
         string indexed_addressing = "(([A-Za-z][A-Za-z0-9]*)|([0-9]+)|(#|@)?\\*),x";
         //  ([A-Za-z][A-Za-z0-9]*)((\+|-|\*|\/)([0-9]+|[A-Za-z][A-Za-z0-9]*))+
-        string doulbe_operands = "([A-Za-z][A-Za-z0-9]*)((\\+|-|\\*|\\/)([0-9]+|[A-Za-z][A-Za-z0-9]*))+";
+        string doulbe_operands = "([A-Za-z][A-Za-z0-9]*)((\\+|\\-|\\*|\\/)([0-9]+|[A-Za-z][A-Za-z0-9]*))+";
         // \s*(([A-Za-z0-9]+)\s+)?(shiftl|shiftr)\s+(([A-Za-z]),([0-9]+))\s*
         string shift = "\\s*(([A-Za-z0-9]+)\\s+)?(shiftl|shiftr)\\s+(([A-Za-z]),([0-9]+))\\s*";
         // \s*(([A-Za-z0-9]*)\s+)?(norm|sio|tio|fix|float|hio)\s*

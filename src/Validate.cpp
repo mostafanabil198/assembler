@@ -14,6 +14,7 @@ Validate::Validate()
 
 void Validate::table(Instructions i)
 {
+    regex exp_Regex(doulbe_operands);
     bool literals = false;
 
     if(i.getError() == "")
@@ -202,6 +203,15 @@ void Validate::table(Instructions i)
                                     }
                                 }
                             }
+                            else if(regex_match(i.getOperand(), exp_Regex))
+                            {
+                                // expretion
+                                pair<bool, string> result = evalutor.checkOperand(i);
+                                if(result.first)
+                                {
+                                    tables->symbol_table_add(i.getLabel(),stoi(i.getObjectCode()),result.second);
+                                }
+                            }
                             else if(isalpha(i.getOperand()[0]))
                             {
                                 if(!tables->symbol_table_contains(i.getOperand()))
@@ -245,6 +255,23 @@ void Validate::table(Instructions i)
                                 i.setError("wrong label");
                             }
                         }
+                        else if(regex_match(i.getOperand(), exp_Regex))
+                        {
+                            // expretion
+                            pair<bool, string> result = evalutor.checkOperand(i);
+                            if(result.first)
+                            {
+                                if(result.second == "relocatable")
+                                {
+                                    add = stoi(i.getObjectCode());
+                                }
+                                else
+                                {
+                                    i.setError("wrong operand type");
+                                }
+                            }
+                        }
+
                         else
                         {
                             if(!tables->symbol_table_contains(i.getOperand()))
@@ -536,6 +563,16 @@ void Validate::table(Instructions i)
                                         }
                                     }
                                 }
+                                else if(regex_match(i.getOperand(), exp_Regex))
+                                {
+                                    // expretion
+                                    pair<bool, string> result = evalutor.checkOperand(i);
+                                    if(result.first)
+                                    {
+                                        tables->symbol_table_add(i.getLabel(),stoi(i.getObjectCode()),result.second);
+                                    }
+                                }
+
                                 else if(isalpha(i.getOperand()[0]))
                                 {
                                     if(!tables->symbol_table_contains(i.getOperand()))
@@ -577,6 +614,23 @@ void Validate::table(Instructions i)
                                     i.setError("wrong label");
                                 }
                             }
+                            else if(regex_match(i.getOperand(), exp_Regex))
+                            {
+                                // expretion
+                                pair<bool, string> result = evalutor.checkOperand(i);
+                                if(result.first)
+                                {
+                                    if(result.second == "relocatable")
+                                    {
+                                        add = stoi(i.getObjectCode());
+                                    }
+                                    else
+                                    {
+                                        i.setError("wrong operand type");
+                                    }
+                                }
+                            }
+
                             else
                             {
                                 if(!tables->symbol_table_contains(i.getOperand()))
@@ -599,13 +653,14 @@ void Validate::table(Instructions i)
                         i.setAdress(add);
                         i.setBaseL(baseLabel);
                         i.setBase(base);
-                       // literals = true;
+                        // literals = true;
 
                         if(i.getLabel() !="")
                         {
-                              i.setError("cannot have a label");
-                        }else
-                              literals = true;
+                            i.setError("cannot have a label");
+                        }
+                        else
+                            literals = true;
 
 
 
